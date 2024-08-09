@@ -1,0 +1,12 @@
+services:
+  chip-ota-provider:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: "host"
+    volumes:
+      - /run/docker.sock:/run/docker.sock:ro
+      - ./ota-firmware.bin:/app/ota-firmware.bin
+    entrypoint: /bin/sh
+    command:
+      - "/app/run_ota_provider.sh"
